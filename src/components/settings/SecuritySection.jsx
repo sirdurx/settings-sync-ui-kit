@@ -26,6 +26,21 @@ const SecuritySection = ({
   const [showTransactionPinModal, setShowTransactionPinModal] = useState(false);
   const [showResetPinModal, setShowResetPinModal] = useState(false);
 
+  const handleChangePasswordClick = () => {
+    console.log("Change password clicked");
+    setShowChangePasswordModal(true);
+  };
+
+  const handleTransactionPinClick = () => {
+    console.log("Set transaction pin clicked");
+    setShowTransactionPinModal(true);
+  };
+
+  const handleResetPinClick = () => {
+    console.log("Forgot transaction pin clicked");
+    setShowResetPinModal(true);
+  };
+
   return (
     <SectionContainer title="Security">
       <SettingItem
@@ -43,7 +58,7 @@ const SecuritySection = ({
         </div>
         <button 
           className="text-blue-600 flex items-center"
-          onClick={() => setShowChangePasswordModal(true)}
+          onClick={handleChangePasswordClick}
         >
           <FiEdit2 className="mr-1" /> Edit
         </button>
@@ -56,7 +71,7 @@ const SecuritySection = ({
         </div>
         <button 
           className="text-blue-600 flex items-center"
-          onClick={() => setShowTransactionPinModal(true)}
+          onClick={handleTransactionPinClick}
         >
           <FiEdit2 className="mr-1" /> Edit
         </button>
@@ -69,7 +84,7 @@ const SecuritySection = ({
         </div>
         <button 
           className="text-blue-600 flex items-center"
-          onClick={() => setShowResetPinModal(true)}
+          onClick={handleResetPinClick}
         >
           <FiEdit2 className="mr-1" /> Edit
         </button>
@@ -108,6 +123,7 @@ const SecuritySection = ({
           setShowTransactionPinModal(false);
           setShowResetPinModal(false);
         }} 
+        isReset={showResetPinModal}
       />
     </SectionContainer>
   );
