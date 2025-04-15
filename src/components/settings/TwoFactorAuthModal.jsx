@@ -10,7 +10,6 @@ import { Input } from '@/components/ui/input';
 const TwoFactorAuthModal = ({
   verificationMethod,
   handleSelectMethod,
-  handleBack,
   qrCodeKey,
   oneTimeCode,
   setOneTimeCode,
@@ -20,7 +19,7 @@ const TwoFactorAuthModal = ({
   setPassword,
   onClose
 }) => {
-  const [currentStep, setCurrentStep] = useState("select"); // select, authenticatorSetup, smsSetup, verifyCode
+  const [currentStep, setCurrentStep] = useState("select");
   const [verificationCode, setVerificationCode] = useState(['', '', '', '', '', '']);
   const [showQRCode, setShowQRCode] = useState(false);
   const inputRefs = useRef([]);
@@ -34,9 +33,12 @@ const TwoFactorAuthModal = ({
     }
   };
 
+  const handleBack = () => {
+    setCurrentStep("select");
+  };
+
   const handleCopyKey = () => {
     navigator.clipboard.writeText(qrCodeKey);
-    // Could add toast notification here
   };
 
   const handleToggleQRCode = () => {
@@ -114,7 +116,7 @@ const TwoFactorAuthModal = ({
       <div className="flex justify-between items-center mb-1">
         <div className="flex items-center">
           <button 
-            onClick={() => setCurrentStep("select")}
+            onClick={handleBack}
             className="text-[#1F4E79] hover:text-[#1F4E79]/80 mr-2 focus:outline-none"
           >
             <ArrowLeft className="h-5 w-5" />
@@ -224,7 +226,7 @@ const TwoFactorAuthModal = ({
       <div className="flex justify-between items-center mb-1">
         <div className="flex items-center">
           <button 
-            onClick={() => setCurrentStep("select")}
+            onClick={handleBack}
             className="text-[#1F4E79] hover:text-[#1F4E79]/80 mr-2 focus:outline-none"
           >
             <ArrowLeft className="h-5 w-5" />
@@ -257,6 +259,7 @@ const TwoFactorAuthModal = ({
           value={phoneNumber}
           onChange={setPhoneNumber}
           className="w-full mb-4 p-2 border border-gray-300 rounded-md"
+          countrySelectComponent={CountrySelect}
         />
         
         <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -284,6 +287,23 @@ const TwoFactorAuthModal = ({
       </Button>
     </div>
   );
+
+  // Custom country select that shows only the country code
+  const CountrySelect = ({ value, onChange, options }) => {
+    return (
+      <select 
+        value={value} 
+        onChange={(event) => onChange(event.target.value)}
+        className="border-0 bg-transparent text-gray-700 pr-1 focus:ring-0 focus:outline-none"
+      >
+        {options.map(({ value, label }) => (
+          <option key={value} value={value}>
+            {value.toUpperCase()}
+          </option>
+        ))}
+      </select>
+    );
+  };
 
   // Render the appropriate step
   const renderContent = () => {

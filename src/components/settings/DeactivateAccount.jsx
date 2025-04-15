@@ -7,10 +7,10 @@ const DeactivateAccount = () => {
   const [showConfirmation, setShowConfirmation] = useState(false);
   
   return (
-    <div className="bg-white rounded-md shadow-sm p-8">
+    <div className="bg-white rounded-md shadow-sm p-8 mb-6">
       <Dialog open={showConfirmation} onOpenChange={setShowConfirmation}>
         <DialogTrigger asChild>
-          <Button variant="ghost" className="text-red-500 font-medium hover:text-red-600 hover:bg-red-50">
+          <Button variant="ghost" className="text-red-500 font-medium hover:text-red-600 hover:bg-red-50 px-0 justify-start">
             Deactivate Account
           </Button>
         </DialogTrigger>

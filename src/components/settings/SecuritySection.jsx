@@ -3,6 +3,7 @@ import React from 'react';
 import SectionContainer from './SectionContainer';
 import SettingItem from './SettingItem';
 import TwoFactorAuthModal from './TwoFactorAuthModal';
+import { FiEdit2 } from 'react-icons/fi';
 
 const SecuritySection = ({ 
   settings,
@@ -10,7 +11,6 @@ const SecuritySection = ({
   onToggle2FA,
   verificationMethod,
   setVerificationMethod,
-  handleBack,
   qrCodeKey,
   setQrCodeKey,
   oneTimeCode,
@@ -21,7 +21,7 @@ const SecuritySection = ({
   setPassword
 }) => {
   return (
-    <SectionContainer title="Security" height="475px">
+    <SectionContainer title="Security">
       <SettingItem
         title="Two-Factor Authentication (2FA)"
         description="Setup with options for Authenticator App or SMS verification"
@@ -30,30 +30,40 @@ const SecuritySection = ({
         onToggle={onToggle2FA}
       />
       
-      <SettingItem
-        title="Change Password"
-        description="Security settings"
-        onEdit={() => console.log("Change password clicked")}
-      />
+      <div className="flex justify-between items-center mb-4 py-4 border-b border-gray-200">
+        <div>
+          <h3 className="font-medium text-gray-800 mb-1">Change Password</h3>
+          <p className="text-gray-500 text-sm">Security settings</p>
+        </div>
+        <button className="text-blue-600 flex items-center">
+          <FiEdit2 className="mr-1" /> Edit
+        </button>
+      </div>
       
-      <SettingItem
-        title="Set Transaction Pin"
-        description="Necessary for funds withdrawal"
-        onEdit={() => console.log("Set transaction pin clicked")}
-      />
+      <div className="flex justify-between items-center mb-4 py-4 border-b border-gray-200">
+        <div>
+          <h3 className="font-medium text-gray-800 mb-1">Set Transaction Pin</h3>
+          <p className="text-gray-500 text-sm">Necessary for funds withdrawal</p>
+        </div>
+        <button className="text-blue-600 flex items-center">
+          <FiEdit2 className="mr-1" /> Edit
+        </button>
+      </div>
       
-      <SettingItem
-        title="Forgot Transaction Pin?"
-        description="Reset PIN here"
-        onEdit={() => console.log("Forgot transaction pin clicked")}
-        hasBorder={false}
-      />
+      <div className="flex justify-between items-center mb-4 py-4">
+        <div>
+          <h3 className="font-medium text-gray-800 mb-1">Forgot Transaction Pin?</h3>
+          <p className="text-gray-500 text-sm">Reset PIN here</p>
+        </div>
+        <button className="text-blue-600 flex items-center">
+          <FiEdit2 className="mr-1" /> Edit
+        </button>
+      </div>
       
       {showTwoFactorModal && (
         <TwoFactorAuthModal
           verificationMethod={verificationMethod}
           handleSelectMethod={setVerificationMethod}
-          handleBack={handleBack}
           qrCodeKey={qrCodeKey}
           oneTimeCode={oneTimeCode}
           setOneTimeCode={setOneTimeCode}

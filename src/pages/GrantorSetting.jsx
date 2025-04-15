@@ -81,11 +81,6 @@ export default function GrantorSetting() {
     }
   };
 
-  // Handle back navigation
-  const handleBack = () => {
-    setVerificationMethod(null); // Reset to initial step
-  };
-
   return (
     <div className="bg-gray-50 min-h-screen p-8">
       {/* Breadcrumb */}
@@ -103,7 +98,7 @@ export default function GrantorSetting() {
         />
       )}
 
-      <div className="mx-auto">
+      <div className="mx-auto max-w-4xl">
         {/* Notification Settings Section */}
         <NotificationSettings 
           settings={settings} 
@@ -123,7 +118,6 @@ export default function GrantorSetting() {
           onToggle2FA={handleToggle2FA}
           verificationMethod={verificationMethod}
           setVerificationMethod={handleSelectMethod}
-          handleBack={handleBack}
           qrCodeKey={qrCodeKey}
           setQrCodeKey={setQrCodeKey}
           oneTimeCode={oneTimeCode}
